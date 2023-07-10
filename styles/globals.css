@@ -6,3 +6,39 @@
     font-family: 'Open Sans', sans-serif;
     /* font-family: 'Press Start 2P', cursive; */
 }
+body{
+    background-image: url(../assets/images/background.jpg);
+    background-repeat: no-repeat;
+    align-items: center;
+}
+.bc-opaco{
+    background-color:#252323A6;
+}
+.bc-yellow{
+    background-color:#FFD700;
+}
+.txt-white{
+    color: white;
+}
+.txt-center{
+    text-align: center;
+}
+h1{
+    font-family: 'Press Start 2P','Open Sans', sans-serif;
+    color: #FFD700;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+button{
+    font-family: 'Press Start 2P','Open Sans', sans-serif;
+    padding: 1.5rem;
+}
+.desc{
+    padding: 1rem;
+}
+.card{
+    justify-content: center;
+}
+.top{
+    padding: 1.5rem;
+}
