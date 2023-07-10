@@ -9,6 +9,7 @@
 body{
     background-image: url(../assets/images/background.jpg);
     background-repeat: no-repeat;
+    background-size: cover;
     align-items: center;
 }
 .bc-opaco{
@@ -26,20 +27,17 @@ body{
 h1{
     font-family: 'Press Start 2P','Open Sans', sans-serif;
     color: #FFD700;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    text-align: center;
 }
 button{
     font-family: 'Press Start 2P','Open Sans', sans-serif;
-    padding: 1.5rem;
 }
 input{
     border-color: white;
-    height: 4rem;
     border-radius: 0.5rem;
 }
 .desc{
-    padding: 1rem;
+    text-align: center;
 }
 .card{
     justify-content: center;
@@ -47,10 +45,6 @@ input{
     height: 25rem;
     margin-left: 5rem;
     border-radius: 1rem;
-}
-.top{
-    padding: 1.5rem;
-}
-.center{
-    margin: 2rem;
+    font-size: 1.5rem;
+    margin: auto;
 }
