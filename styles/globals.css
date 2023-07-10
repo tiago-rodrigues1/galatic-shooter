@@ -33,12 +33,24 @@ button{
     font-family: 'Press Start 2P','Open Sans', sans-serif;
     padding: 1.5rem;
 }
+input{
+    border-color: white;
+    height: 4rem;
+    border-radius: 0.5rem;
+}
 .desc{
     padding: 1rem;
 }
 .card{
     justify-content: center;
+    width: 37rem;
+    height: 25rem;
+    margin-left: 5rem;
+    border-radius: 1rem;
 }
 .top{
     padding: 1.5rem;
+}
+.center{
+    margin: 2rem;
 }
