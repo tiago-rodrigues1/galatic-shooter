@@ -11,6 +11,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     align-items: center;
+    height: 100%;
 }
 .bc-opaco{
     background-color:#252323A6;
@@ -25,12 +26,7 @@ body{
     text-align: center;
 }
 h1{
-    font-family: 'Press Start 2P','Open Sans', sans-serif;
-    color: #FFD700;
     text-align: center;
-}
-button{
-    font-family: 'Press Start 2P','Open Sans', sans-serif;
 }
 input{
     border-color: white;
@@ -47,4 +43,44 @@ input{
     border-radius: 1rem;
     font-size: 1.5rem;
     margin: auto;
+}
+header {
+    position: fixed;
+    top: 0;
+    height: 10%;
+    width: 100%;
+    font-size: 0.7em;
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.font-ps2p{
+    font-family: 'Press Start 2P','Open Sans', sans-serif;
+    margin-bottom: 0px;
+}
+.txt-yellow{
+    color: #FFD700;
+}
+.txt-red{
+    color: red;
+}
+.txt-green{
+    color: green;
+}
+#div-info{
+    display: flex;
+    justify-content: center;
+}
+#div-name{
+    width: 50%;
+}
+.divs-info{
+    margin: 30px;
+}
+.footer{
+    height: 20%;
+    font-size: 0.85em;
+}
+.p-footer{
+    margin-bottom: 0;
 }
