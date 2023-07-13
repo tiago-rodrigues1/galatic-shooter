@@ -10,13 +10,16 @@
 html, body {
     width: 100vw;
     min-height: 100vh;
-    height: 100%;
 }
 
 body {
     background-image: url(../assets/images/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+p {
+    margin: 0;
 }
 
 .bc-opaco {
@@ -31,39 +34,16 @@ body {
     color: #FBFFFE;
 }
 
-header {
-    position: fixed;
-    top: 0;
-    height: 10%;
-    width: 100%;
-    font-size: 0.7em;
-    display: flex;
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
 .txt-yellow{
     color: #FFD700;
 }
 
 .txt-red{
-    color: red;
+    color: #EB2C1E;
 }
 
 .txt-green{
-    color: green;
-}
-
-#div-info {
-    display: flex;
-    justify-content: center;
-}
-#div-name {
-    width: 50%;
-}
-
-.divs-info {
-    margin: 30px;
+    color: #1EEB6D;
 }
 
 .txt-yellow {
