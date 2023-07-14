@@ -75,3 +75,20 @@ p {
     filter: brightness(.85) !important;
     background-color: #FFD700 !important;
 }
+
+.game-container {
+    flex: 1 !important;
+}
+
+.target {
+    width: 144px !important;
+    height: 144px !important;
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+}
+
+.target:hover {
+    cursor: grab;
+}

@@ -1,3 +1,6 @@
+function getRandomNumber(max) {
+    return Math.floor(Math.random() * max) + 1;
+}
 
 
 $(document).ready(function() {
@@ -29,5 +32,21 @@ $(document).ready(function() {
         }
     });
 
+    $('.game-container').ready(function() {
+        $('.game-container').html(`<img src='assets/images/alvo.png' class='target'>`);
+
+        let x = $('.game-container').innerWidth();
+        let y = $('.game-container').innerHeight();
+
+        console.log(x, y);
+    
+        let styles = {
+            top: getRandomNumber(y - 144) + 'px',
+            left: getRandomNumber(x - 144) + 'px'
+        };
+
+        $('.target').css(styles);
+
+    });
 
 });
