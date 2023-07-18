@@ -33,7 +33,7 @@ $(document).ready(function() {
     });
 
     $('.game-container').ready(function() {
-        $('.game-container').html(`<img src='assets/images/alvo.png' class='target'>`);
+        $('.game-container').html(`<img id="alvo" src='assets/images/alvo.png' class='target'>`);
 
         let x = $('.game-container').innerWidth();
         let y = $('.game-container').innerHeight();
@@ -46,6 +46,22 @@ $(document).ready(function() {
         };
 
         $('.target').css(styles);
+
+        let qtdAcertos = 0;
+
+        $("main").on("click", "#alvo", function() {
+            qtdAcertos++;
+            $("#acertos").html("Acertos: " + qtdAcertos);
+            console.log(qtdAcertos);
+        });
+
+        let qtdErros = 0;
+
+        $("main").on("click", function() {
+            qtdErros++;
+            $("#erros").html("Erros: " + qtdErros);
+            console.log(qtdErros);
+        });
 
     });
 
