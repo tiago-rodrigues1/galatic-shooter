@@ -2,6 +2,17 @@ function getRandomNumber(max) {
     return Math.floor(Math.random() * max) + 1;
 }
 
+function setTargetPosition() {
+    let x = $('.game-container').innerWidth();
+    let y = $('.game-container').innerHeight();
+    
+    let styles = {
+        top: getRandomNumber(y - 144) + 'px',
+        left: getRandomNumber(x - 144) + 'px'
+    };
+
+    $('.target').css(styles);
+}
 
 $(document).ready(function() {
     let nomeJogador = "";
@@ -35,15 +46,7 @@ $(document).ready(function() {
     $('.game-container').ready(function() {
         $('.game-container').html(`<img id="alvo" src='assets/images/alvo.png' class='target'>`);
 
-        let x = $('.game-container').innerWidth();
-        let y = $('.game-container').innerHeight();
-    
-        let styles = {
-            top: getRandomNumber(y - 144) + 'px',
-            left: getRandomNumber(x - 144) + 'px'
-        };
-
-        $('.target').css(styles);
+        setTargetPosition();
 
         let tentativas = 0, acertos = 0, erros = 0;
 
@@ -54,6 +57,7 @@ $(document).ready(function() {
             if (event.target.id == 'alvo') {
                 acertos++;
                 $('#acertos').html('Acertos: ' + acertos);
+                setTargetPosition();
             } else if (event.target.id == 'game-container') {
                 erros++;
                 $('#erros').html('Erros: ' + erros);
