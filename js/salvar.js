@@ -37,8 +37,6 @@ $(document).ready(function() {
 
         let x = $('.game-container').innerWidth();
         let y = $('.game-container').innerHeight();
-
-        console.log(x, y);
     
         let styles = {
             top: getRandomNumber(y - 144) + 'px',
@@ -47,20 +45,19 @@ $(document).ready(function() {
 
         $('.target').css(styles);
 
-        let qtdAcertos = 0;
+        let tentativas = 0, acertos = 0, erros = 0;
 
-        $("main").on("click", "#alvo", function() {
-            qtdAcertos++;
-            $("#acertos").html("Acertos: " + qtdAcertos);
-            console.log(qtdAcertos);
-        });
-
-        let qtdErros = 0;
-
-        $("main").on("click", function() {
-            qtdErros++;
-            $("#erros").html("Erros: " + qtdErros);
-            console.log(qtdErros);
+        $('.game-container').on('click', function(event) {
+            tentativas++;
+            $('#tentativas').html('Tentativas: ' + tentativas);
+            
+            if (event.target.id == 'alvo') {
+                acertos++;
+                $('#acertos').html('Acertos: ' + acertos);
+            } else if (event.target.id == 'game-container') {
+                erros++;
+                $('#erros').html('Erros: ' + erros);
+            }
         });
 
     });
