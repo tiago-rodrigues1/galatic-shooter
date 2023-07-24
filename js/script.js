@@ -18,6 +18,7 @@ $(document).ready(function() {
     let nomeJogador = "";
     let campo = $("#nome");
     let comecarBtn = $('#play');
+    let jogarNovamente = $("#replay");
 
     $(campo).on('input', function() {
         if ($(this).val() !== '0') {
@@ -32,6 +33,10 @@ $(document).ready(function() {
 
     $(comecarBtn).click(function() {
         window.location.href = `galatic.html?nome=${nomeJogador}`;
+    });
+
+    $(jogarNovamente).click(function(){
+        window.location.href = `index.html`;
     });
     
     $('#player').ready(function() {
@@ -60,7 +65,10 @@ $(document).ready(function() {
                 setTargetPosition();
             } else if (event.target.id == 'game-container') {
                 erros++;
-                $('#erros').html('Erros: ' + erros);
+                $('#erros').html('Erros: ' + erros + "/5");
+                if(erros >= 5){
+                    window.location.href = `gameOver.html`;
+                }
             }
         });
 
