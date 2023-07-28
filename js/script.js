@@ -3,6 +3,8 @@ function getRandomNumber(max) {
 }
 
 function setTargetPosition() {
+    $('#alvo').attr('src', 'assets/images/alvo.png');
+
     let x = $('.game-container').innerWidth();
     let y = $('.game-container').innerHeight();
     
@@ -12,6 +14,54 @@ function setTargetPosition() {
     };
 
     $('.target').css(styles);
+}
+
+let tentativas = 0, acertos = 0, erros = 0;
+
+function handleTentativas() {
+    tentativas++;
+    $('#tentativas').html('Tentativas: ' + tentativas); 
+}
+
+function handleErros() {
+    erros++;
+    $('#erros').html('Erros: ' + erros + "/5");
+
+    if (erros >= 5) {
+        window.location.href = 'gameOver.html';
+    }
+}
+
+function handleAcertos() {
+    $('#alvo').attr('src', 'assets/images/alvo-acertado.png');
+
+    acertos++;
+    $('#acertos').html('Acertos: ' + acertos);
+
+    setTimeout(function() {
+        setTargetPosition();
+    }, 300);
+}
+
+let interval; 
+function handleTemporizador() {
+    let segundosRestantes = 10;
+    
+    if (interval) {
+        clearInterval(interval);
+    }
+
+    interval = setInterval(function() {
+        if (segundosRestantes > 0) {
+            segundosRestantes -= 1;
+            $('#tempo').html(`00:${ String(segundosRestantes).length < 2 ? '0' + segundosRestantes : segundosRestantes}`);
+        } else {
+            clearInterval(interval);
+            handleTentativas();
+            handleErros();
+            handleTemporizador();
+        }
+    }, 1000);
 }
 
 $(document).ready(function() {
@@ -49,26 +99,22 @@ $(document).ready(function() {
     });
 
     $('.game-container').ready(function() {
-        $('.game-container').html(`<img id="alvo" src='assets/images/alvo.png' class='target'>`);
+        $('.game-container').html('<img id="alvo" src="assets/images/alvo.png" class="target">');
+
+        $('#explosao').hide();
 
         setTargetPosition();
 
-        let tentativas = 0, acertos = 0, erros = 0;
+        handleTemporizador();
 
         $('.game-container').on('click', function(event) {
-            tentativas++;
-            $('#tentativas').html('Tentativas: ' + tentativas);
+            handleTentativas();
             
             if (event.target.id == 'alvo') {
-                acertos++;
-                $('#acertos').html('Acertos: ' + acertos);
-                setTargetPosition();
+                handleAcertos();
+                handleTemporizador();
             } else if (event.target.id == 'game-container') {
-                erros++;
-                $('#erros').html('Erros: ' + erros + "/5");
-                if(erros >= 5){
-                    window.location.href = `gameOver.html`;
-                }
+                handleErros();
             }
         });
 
