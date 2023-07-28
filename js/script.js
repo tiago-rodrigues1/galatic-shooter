@@ -45,16 +45,17 @@ function handleAcertos() {
 
 let interval; 
 function handleTemporizador() {
-    let segundosRestantes = 10;
+    const tempoTotal = 5;
+    let segundosRestantes = tempoTotal;
     
     if (interval) {
         clearInterval(interval);
     }
 
     interval = setInterval(function() {
+        $('#tempo_bar').width(`${(segundosRestantes / tempoTotal) * 100}%`);
         if (segundosRestantes > 0) {
             segundosRestantes -= 1;
-            $('#tempo').html(`00:${ String(segundosRestantes).length < 2 ? '0' + segundosRestantes : segundosRestantes}`);
         } else {
             clearInterval(interval);
             handleTentativas();

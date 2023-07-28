@@ -27,6 +27,10 @@ p {
     background-color:#252323A6;
 }
 
+.bc-black {
+    background-color: #252323;
+}
+
 .bc-yellow {
     background-color:#FFD700;
 }
@@ -63,6 +67,10 @@ p {
     border: 1px solid #FBFFFE;
 }
 
+.border-white--light {
+    border: 1px solid #fbfffe24;
+}
+
 .btn {
     transition: 200ms;
 }
@@ -94,4 +102,8 @@ p {
 
 .game-container:hover {
     cursor: url(../assets/icons/crosshair.svg),auto;
+}
+
+#tempo_bar {
+    transition: width 500ms linear;
 }
