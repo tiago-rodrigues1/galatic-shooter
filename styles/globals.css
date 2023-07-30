@@ -84,9 +84,12 @@ p {
     width: 144px !important;
     height: 144px !important;
     position: absolute;
-    z-index: 99999;
     top: 0;
     left: 0;
+}
+
+#alvo {
+    z-index: 99999;
 }
 
 .game-container:hover {
