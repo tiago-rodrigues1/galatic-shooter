@@ -2,18 +2,25 @@ function getRandomNumber(max) {
     return Math.floor(Math.random() * max) + 1;
 }
 
+let positionInterval;
 function setTargetPosition() {
     $('#alvo').attr('src', 'assets/images/alvo.png');
 
-    let x = $('.game-container').innerWidth();
-    let y = $('.game-container').innerHeight();
-    
-    let styles = {
-        top: getRandomNumber(y - 144) + 'px',
-        left: getRandomNumber(x - 144) + 'px'
-    };
+    if (positionInterval) {
+        clearInterval(positionInterval);
+    }
 
-    $('.target').css(styles);
+    positionInterval = setInterval(function () {
+        let x = $('.game-container').innerWidth();
+        let y = $('.game-container').innerHeight();
+    
+        let styles = {
+            top: getRandomNumber(y - 144) + 'px',
+            left: getRandomNumber(x - 144) + 'px'
+        };
+
+        $('.target').css(styles);
+    }, 1000);
 }
 
 let tentativas = 0, acertos = 0, erros = 0;
@@ -45,16 +52,17 @@ function handleAcertos() {
 
 let interval; 
 function handleTemporizador() {
-    let segundosRestantes = 10;
+    const tempoTotal = 7;
+    let segundosRestantes = tempoTotal;
     
     if (interval) {
         clearInterval(interval);
     }
 
     interval = setInterval(function() {
+        $('#tempo_bar').width(`${(segundosRestantes / tempoTotal) * 100}%`);
         if (segundosRestantes > 0) {
             segundosRestantes -= 1;
-            $('#tempo').html(`00:${ String(segundosRestantes).length < 2 ? '0' + segundosRestantes : segundosRestantes}`);
         } else {
             clearInterval(interval);
             handleTentativas();
@@ -99,7 +107,7 @@ $(document).ready(function() {
     });
 
     $('.game-container').ready(function() {
-        $('.game-container').html('<img id="alvo" src="assets/images/alvo.png" class="target">');
+        $('.game-container').html('<img id="alvo" src="assets/images/alvo.png" draggable="false" class="target">');
 
         $('#explosao').hide();
 
