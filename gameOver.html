@@ -12,11 +12,31 @@
 </head>
 <body class="w-100 h-100 d-flex flex-column justify-content-between">
     
-    <main class="w-100 h-100  d-flex align-items-center vstack justify-content-center">
-            <h1 class="w-100 m-0 p-4 fw-bold rounded-top text-center title-font txt-white">Game Over</h1>   
+    <main class="flex-fill w-100 h-100 d-flex align-items-center vstack justify-content-center">
+        <h1 class="w-100 m-0 p-4 fw-bold rounded-top text-center title-font txt-white">Game Over</h1>   
+        <div class="bc-opaco d-flex flex-column card col-10 col-md-6 col-xl-4 rounded">
+            <p class="w-100 m-0 p-4 fw-bold bc-yellow rounded-top title-font text-center txt-black">Ranking</p>
+            <div class="vstack p-4">
+                <table class="txt-white">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Acertos</th>
+                        <th>Erros</th>
+                        <th>Data</th>
+                    </tr>
+                    <tr>
+                        <td>Naty</td>
+                        <td>10</td>
+                        <td>1</td>
+                        <td>10/10/23</td>
+                    </tr>
+                </table>
+            </div>
+            
             <button id="replay" type="button" class="mt-5 btn p-4 bc-yellow title-font border-0 txt-black rounded-bottom" >Jogar Novamente</button>
         </div>
     </main>
+
 
     <footer class="p-3 bc-opaco txt-white d-flex justify-content-evenly hstack align-items-center" style="font-size: 14px;">
         <p class="m-0 text-center"> 
