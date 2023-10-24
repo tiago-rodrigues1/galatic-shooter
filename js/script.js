@@ -1,76 +1,75 @@
-function getRandomNumber(max) {
-    return Math.floor(Math.random() * max) + 1;
-}
+const facade = {
+    props: {
+        attempts: 0,
+        misses: 0,
+        hits: 0,
+        positionInterval: null,
+        timerInterval: null,
+        matchSeconds: 10
+    },
 
-let positionInterval;
-function setTargetPosition() {
-    $('#alvo').attr('src', 'assets/images/alvo.png');
+    randomNumber: function(max) {
+        return Math.floor(Math.random() * max) + 1;
+    },
 
-    if (positionInterval) {
-        clearInterval(positionInterval);
-    }
+    attemptsHandler: function() {
+        this.props.attempts++;
+        $('#tentativas').html('Tentativas: ' + this.props.attempts);
+    },
 
-    positionInterval = setInterval(function () {
-        let x = $('.game-container').innerWidth();
-        let y = $('.game-container').innerHeight();
+    missTargetHandler: function() {
+        this.props.misses++;
+        $('#erros').html('Erros: ' + this.props.misses);
+    },
+
+    hitTargetHandler: function() {
+        this.props.hits++;
+
+        $('#alvo').attr('src', 'assets/images/alvo-acertado.png');
+        $('#acertos').html('Acertos: ' + this.props.hits);
+
+        setTimeout(function() {
+            $('#alvo').attr('src', 'assets/images/alvo.png');
+        }, 250);
+    },
+
+    targetHandler: function() {
+        let { randomNumber } = this;
+        $('#alvo').attr('src', 'assets/images/alvo.png');
     
-        let styles = {
-            top: getRandomNumber(y - 144) + 'px',
-            left: getRandomNumber(x - 144) + 'px'
-        };
-
-        $('.target').css(styles);
-    }, 1000);
-}
-
-let tentativas = 0, acertos = 0, erros = 0;
-
-function handleTentativas() {
-    tentativas++;
-    $('#tentativas').html('Tentativas: ' + tentativas); 
-}
-
-function handleErros() {
-    erros++;
-    $('#erros').html('Erros: ' + erros + "/5");
-
-    if (erros >= 5) {
-        window.location.href = 'gameOver.html';
-    }
-}
-
-function handleAcertos() {
-    $('#alvo').attr('src', 'assets/images/alvo-acertado.png');
-
-    acertos++;
-    $('#acertos').html('Acertos: ' + acertos);
-
-    setTimeout(function() {
-        setTargetPosition();
-    }, 300);
-}
-
-let interval; 
-function handleTemporizador() {
-    const tempoTotal = 7;
-    let segundosRestantes = tempoTotal;
+        setInterval(function () {
+            let x = $('.game-container').innerWidth();
+            let y = $('.game-container').innerHeight();
+        
+            let styles = {
+                top: randomNumber(y - 144) + 'px',
+                left: randomNumber(x - 144) + 'px'
+            };
     
-    if (interval) {
-        clearInterval(interval);
-    }
+            $('.target').css(styles);
+        }, 1000);
+    },
 
-    interval = setInterval(function() {
-        $('#tempo_bar').width(`${(segundosRestantes / tempoTotal) * 100}%`);
-        if (segundosRestantes > 0) {
-            segundosRestantes -= 1;
-        } else {
-            clearInterval(interval);
-            handleTentativas();
-            handleErros();
-            handleTemporizador();
+    timerHandler: function() {
+        let secondsLeft = this.props.matchSeconds;
+        let { matchSeconds } = this.props;
+    
+        if (this.props.timerInterval) {
+            clearInterval(this.props.timerInterval);
         }
-    }, 1000);
-}
+
+        this.props.timerInterval = setInterval(function() {
+            console.log(secondsLeft);
+            $('#tempo_bar').width(`${(secondsLeft / matchSeconds) * 100}%`);
+            if (secondsLeft < 0) {
+                /* SALVAR PARTIDA */
+                alert("Tempo esgostado")
+            } else {
+                secondsLeft -= 1;
+            }
+        }, 1000);
+    }
+};
 
 $(document).ready(function() {
     let nomeJogador = "";
@@ -111,18 +110,17 @@ $(document).ready(function() {
 
         $('#explosao').hide();
 
-        setTargetPosition();
+        facade.targetHandler();
 
-        handleTemporizador();
+        facade.timerHandler();
 
         $('.game-container').on('click', function(event) {
-            handleTentativas();
+            facade.attemptsHandler();
             
             if (event.target.id == 'alvo') {
-                handleAcertos();
-                handleTemporizador();
+                facade.hitTargetHandler();
             } else if (event.target.id == 'game-container') {
-                handleErros();
+                facade.missTargetHandler();
             }
         });
 
