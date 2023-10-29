@@ -7,7 +7,7 @@ class Partida {
 
     private function connect() {
         $conn = new PDO("sqlite:../db/gs_db.sqlite");
-		$conn->setAttribute("PDO::ATTR_DEFAULT_FETCH_MODE", PDO::FETCH_OBJ);
+		$conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
 		return $conn;
     }
