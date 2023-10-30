@@ -64,7 +64,6 @@ const facade = {
             console.log(secondsLeft);
             $('#tempo_bar').width(`${(secondsLeft / matchSeconds) * 100}%`);
             if (secondsLeft < 0) {
-                alert("Tempo esgotado");
                 $('#form1').submit();
             } else {
                 secondsLeft -= 1;
@@ -108,25 +107,25 @@ $(document).ready(function() {
         }
     });
 
-    $('.game-container').ready(function() {
-        $('.game-container').html('<img id="alvo" src="assets/images/alvo.png" draggable="false" class="target">');
-
-        $('#explosao').hide();
-
-        facade.targetHandler();
-
-        facade.timerHandler();
-
-        $('.game-container').on('click', function(event) {
-            facade.attemptsHandler();
-            
-            if (event.target.id == 'alvo') {
-                facade.hitTargetHandler();
-            } else if (event.target.id == 'game-container') {
-                facade.missTargetHandler();
-            }
-        });
-
+    $('#form1').ready(function() {
+        if ($('#form1').attr('id')) {    
+            $('.game-container').html('<img id="alvo" src="assets/images/alvo.png" draggable="false" class="target">');
+    
+            $('#explosao').hide();
+    
+            facade.targetHandler();
+    
+            facade.timerHandler();
+    
+            $('.game-container').on('click', function(event) {
+                facade.attemptsHandler();
+                
+                if (event.target.id == 'alvo') {
+                    facade.hitTargetHandler();
+                } else if (event.target.id == 'game-container') {
+                    facade.missTargetHandler();
+                }
+            });
+        }
     });
-
 });
