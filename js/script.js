@@ -20,6 +20,7 @@ const facade = {
     missTargetHandler: function() {
         this.props.misses++;
         $('#erros').html('Erros: ' + this.props.misses);
+        $('#numErros').attr('value', this.props.misses);
     },
 
     hitTargetHandler: function() {
@@ -27,6 +28,7 @@ const facade = {
 
         $('#alvo').attr('src', 'assets/images/alvo-acertado.png');
         $('#acertos').html('Acertos: ' + this.props.hits);
+        $('#numAcertos').attr('value', this.props.hits);
 
         setTimeout(function() {
             $('#alvo').attr('src', 'assets/images/alvo.png');
@@ -62,8 +64,7 @@ const facade = {
             console.log(secondsLeft);
             $('#tempo_bar').width(`${(secondsLeft / matchSeconds) * 100}%`);
             if (secondsLeft < 0) {
-                /* SALVAR PARTIDA */
-                alert("Tempo esgostado")
+                $('#form1').submit();
             } else {
                 secondsLeft -= 1;
             }
@@ -102,28 +103,29 @@ $(document).ready(function() {
         if (urlParams) {
             let urlParamsJogador = urlParams.split('=')[1];
             $('#player').html(urlParamsJogador);
+            $('#txtJogador').attr('value', urlParamsJogador);
         }
     });
 
-    $('.game-container').ready(function() {
-        $('.game-container').html('<img id="alvo" src="assets/images/alvo.png" draggable="false" class="target">');
-
-        $('#explosao').hide();
-
-        facade.targetHandler();
-
-        facade.timerHandler();
-
-        $('.game-container').on('click', function(event) {
-            facade.attemptsHandler();
-            
-            if (event.target.id == 'alvo') {
-                facade.hitTargetHandler();
-            } else if (event.target.id == 'game-container') {
-                facade.missTargetHandler();
-            }
-        });
-
+    $('#form1').ready(function() {
+        if ($('#form1').attr('id')) {    
+            $('.game-container').html('<img id="alvo" src="assets/images/alvo.png" draggable="false" class="target">');
+    
+            $('#explosao').hide();
+    
+            facade.targetHandler();
+    
+            facade.timerHandler();
+    
+            $('.game-container').on('click', function(event) {
+                facade.attemptsHandler();
+                
+                if (event.target.id == 'alvo') {
+                    facade.hitTargetHandler();
+                } else if (event.target.id == 'game-container') {
+                    facade.missTargetHandler();
+                }
+            });
+        }
     });
-
 });
