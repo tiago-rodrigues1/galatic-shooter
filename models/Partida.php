@@ -35,6 +35,16 @@ class Partida {
 		return $prepare->execute();
 	}
 
+	public static function listar() { 
+		$partida = new Partida();
+        $conn = $partida->connectDB();
+
+        $q = $conn->query("SELECT * FROM partidas;");
+        $partidas = $q->fetchAll(PDO::FETCH_OBJ);
+    
+        return $partidas;
+	}
+
     /* --- GETTERS AND SETTERS ---*/
 	public function getId() {
 		return $this->id;

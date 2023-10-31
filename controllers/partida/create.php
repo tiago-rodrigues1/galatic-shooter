@@ -10,7 +10,7 @@ $partida = new Partida($jogador, $acertos, $erros);
 $response = $partida->save();
 
 if ($response) {
-    header("Location:/gameOver.html");
+    header("Location:/gameOver.php");
 } else {
     header("Location:/index.html");
 }
