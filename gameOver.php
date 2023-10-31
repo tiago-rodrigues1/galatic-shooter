@@ -17,25 +17,28 @@ require_once("models/Partida.php");
     
     <main class="flex-fill w-100 h-100 d-flex align-items-center vstack justify-content-center">
         <h1 class="w-100 m-0 p-4 fw-bold rounded-top text-center title-font txt-white">Game Over</h1>   
-        <div class="bc-opaco d-flex flex-column card col-10 col-md-6 col-xl-4 rounded">
+        <div class="bc-opaco d-flex flex-column card col-10 col-md-6 col-xl-4 rounded" style="width: 38rem;">
             <p class="w-100 m-0 p-4 fw-bold bc-yellow rounded-top title-font text-center txt-black">Ranking</p>
             <div class="vstack p-4">
                 <table class="txt-white">
                     <tr>
                         <th>Ranking</th>
-                        <th>Nome</th>
+                        <th>Nome</th> 
                         <th>Acertos</th>
                         <th>Erros</th>
                         <th>Data</th>
                     </tr>
                     <?php
-                    
-                    $partidas = Partida::listar();
+                    $conn = new PDO("sqlite:db/gs_db.sqlite");
+                    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+
+                    $q = $conn->query("SELECT * FROM partidas ORDER BY acertos DESC, erros ASC, data_hora DESC;");
+                    $partidas = $q->fetchAll();
                     $i = 1;
 
                     foreach($partidas as $p):
                     ?>
-                    <tr>
+                    <tr style="text-align: justify;">
                         <td><?= $i++ ?></td>
                         <td><?= $p->jogador; ?></td>
                         <td><?= $p->acertos; ?></td>
