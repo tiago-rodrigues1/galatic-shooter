@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+require_once("models/Partida.php");
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,20 +28,24 @@
                         <th>Erros</th>
                         <th>Data</th>
                     </tr>
+                    <?php
+                    
+                    $partidas = Partida::listar();
+                    $i = 1;
+
+                    foreach($partidas as $p):
+                    ?>
                     <tr>
-                        <td>1°</td>
-                        <td>Naty</td>
-                        <td>10</td>
-                        <td>1</td>
-                        <td>10/10/23</td>
+                        <td><?= $i++ ?></td>
+                        <td><?= $p->jogador; ?></td>
+                        <td><?= $p->acertos; ?></td>
+                        <td><?= $p->erros; ?></td>
+                        <td><?= $p->data_hora; ?></td>
                     </tr>
-                    <tr>
-                        <td>2°</td>
-                        <td>Naty</td>
-                        <td>10</td>
-                        <td>1</td>
-                        <td>10/10/23</td>
-                    </tr>
+                    <?php
+                    endforeach;
+               
+                    ?>
                 </table>
             </div>
             
