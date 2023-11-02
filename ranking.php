@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+require_once("models/Partida.php");
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,32 +16,36 @@
 <body class="w-100 h-100 d-flex flex-column justify-content-between">
     
     <main class="flex-fill w-100 h-100 d-flex align-items-center vstack justify-content-center">
-        <h1 class="w-100 m-0 p-4 fw-bold rounded-top text-center title-font txt-white">Game Over</h1>   
-        <div class="bc-opaco d-flex flex-column card col-10 col-md-6 col-xl-4 rounded">
+        <h1 class="w-100 m-0 p-4 fw-bold rounded-top text-center title-font txt-white">Ranking</h1>   
+        <div class="bc-opaco d-flex flex-column card col-10 col-md-6 col-xl-4 rounded" style="width: 38rem;">
             <p class="w-100 m-0 p-4 fw-bold bc-yellow rounded-top title-font text-center txt-black">Ranking</p>
             <div class="vstack p-4">
                 <table class="txt-white">
                     <tr>
-                        <th>Ranking</th>
-                        <th>Nome</th>
+                        <th>Posição</th>
+                        <th>Nome</th> 
                         <th>Acertos</th>
                         <th>Erros</th>
                         <th>Data</th>
                     </tr>
-                    <tr>
-                        <td>1°</td>
-                        <td>Naty</td>
-                        <td>10</td>
-                        <td>1</td>
-                        <td>10/10/23</td>
-                    </tr>
-                    <tr>
-                        <td>2°</td>
-                        <td>Naty</td>
-                        <td>10</td>
-                        <td>1</td>
-                        <td>10/10/23</td>
-                    </tr>
+                    <?php
+                        require_once "models/Partida.php";
+
+                        $partidas = Partida::listar();
+                        $i = 1;
+
+                        foreach($partidas as $p):
+                        ?>
+                        <tr style="text-align: justify;">
+                            <td><?= $i++ ?></td>
+                            <td><?= $p->jogador; ?></td>
+                            <td><?= $p->acertos; ?></td>
+                            <td><?= $p->erros; ?></td>
+                            <td><?= $p->data_hora; ?></td>
+                        </tr>
+                    <?php
+                        endforeach;
+                    ?>
                 </table>
             </div>
             

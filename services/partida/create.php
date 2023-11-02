@@ -1,16 +1,16 @@
 <?php
-require "../../models/Partida.php";
+require_once "../../models/Partida.php";
 
 $jogador = $_GET["txtJogador"];
 $acertos = $_GET["numAcertos"];
 $erros = $_GET["numErros"];
 
 
-$partida = new Partida($jogador, $acertos, $erros);
+$partida = new Partida(urldecode($jogador), $acertos, $erros);
 $response = $partida->save();
 
 if ($response) {
-    header("Location:/gameOver.html");
+    header("Location:/ranking.php");
 } else {
     header("Location:/index.html");
 }
