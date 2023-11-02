@@ -12,18 +12,20 @@ class Partida {
 		$this->erros = $erros;
 	}
 
-    private function connectDB() {
-        $conn = new PDO("sqlite:../../db/gs_db.sqlite");
+    private static function connectDB() {
+		$dbPath = substr(__DIR__, 0, strrpos(__DIR__, "galatic-shooter") + 15)."/db/gs_db.sqlite";
+		$conn = new PDO("sqlite:".$dbPath);
 		$conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
 		return $conn;
+		
     }
 
 	public function save() {
 		date_default_timezone_set('America/Sao_Paulo');
 		$this->data_hora = date('d/m/Y H:i', time());
 		
-		$conn = $this->connectDB();
+		$conn = Partida::connectDB();
 
 		$prepare = $conn->prepare("INSERT INTO partidas(jogador, acertos, erros, data_hora) VALUES(:jogador, :acertos, :erros, :datahora);");
 
@@ -36,11 +38,10 @@ class Partida {
 	}
 
 	public static function listar() { 
-		$partida = new Partida();
-        $conn = $partida->connectDB();
+		$conn = Partida::connectDB();
 
-        $q = $conn->query("SELECT * FROM partidas;");
-        $partidas = $q->fetchAll(PDO::FETCH_OBJ);
+        $q = $conn->query("SELECT * FROM partidas ORDER BY acertos DESC, erros ASC, data_hora DESC;");
+        $partidas = $q->fetchAll();
     
         return $partidas;
 	}
